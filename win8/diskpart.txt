@@ -1,0 +1,4 @@
+sel disk 0
+sel partition 1
+assign letter=K
+exit
