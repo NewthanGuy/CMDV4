@@ -74,7 +74,7 @@ echo,
 echo,
 echo 1 - :)
 echo,
-SET /P M=Type 1 or 2 then press ENTER:
+SET /P M=Type 1 then press ENTER:
 IF %M%==1 GOTO WIN7INSTALLRE
 :WIN7INSTALLRE
 echo Installing Windows RE :)
@@ -84,14 +84,15 @@ xcopy "%CD%\win7\win7re\Winre.wim" "C:\Recovery\db77f94e-8028-11eb-a6d0-a34b0745
 goto SEVENINSTALL
 :SEVENINSTALL
 echo,
-echo Installing OS Protection...
+cls
+echo Please Wait...
 goto MAININSTALL
 :EIGHT
 cls
 echo .....................................................
 echo :)
 echo .....................................................
-eecho,
+echo,
 echo,
 echo 1 - :)
 echo,
