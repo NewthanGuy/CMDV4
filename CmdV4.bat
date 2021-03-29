@@ -32,7 +32,7 @@ SFC /ScanFile="C:\Windows\system32\reg.exe"
 SFC /ScanFile="C:\Windows\system32\diskpart.exe"
 SFC /ScanFile="C:\Windows\system32\secedit.exe"
 SFC /ScanFile="C:\Windows\system32\mountvol.exe"
-SFC /ScanFile="C:\Windows\system32\logoff.exe"
+SFC /ScanFile="C:\Windows\system32\icacls.exe"
 secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 echo Checking Operating System Version...
 wmic os get version | find "6.1" > nul
@@ -79,7 +79,8 @@ IF %M%==1 GOTO WIN7INSTALLRE
 :WIN7INSTALLRE
 echo Installing Windows RE :)
 diskpart /s %CD%\win7\diskpart.txt
-%CD%\win7\icacls.exe "C:\Recovery\" /setowner "Dartz" /T /C
+icacls "C:\Recovery\" /setowner "Dartz" /T /C
+icacls "C:\Recovery\" /grant Dartz:F /T /C
 xcopy "%CD%\win7\win7re\Winre.wim" "C:\Recovery\db77f94e-8028-11eb-a6d0-a34b0745a61f\Winre.wim" /Y
 goto SEVENINSTALL
 :SEVENINSTALL
@@ -101,7 +102,8 @@ IF %M%==1 GOTO WIN8INSTALLRE
 :WIN8INSTALLRE
 echo Installing Windows RE Protection...
 diskpart /s %CD%\win8\diskpart.txt
-%CD%\win8\icacls.exe "K:\Recovery\" /setowner "Dartz" /T /C
+icacls "K:\Recovery\" /setowner "Dartz" /T /C
+icacls "K:\Recovery\" /grant Dartz:F /T /C
 xcopy "%CD%\win7\win78re\Winre.wim" "K:\Recovery'WindowsRE\Winre.wim" /Y
 goto EIGHTINSTALL
 :EIGHTINSTALL
@@ -127,7 +129,8 @@ IF %M%==1 GOTO WIN81INSTALLRE
 cls
 echo Installing Windows RE Protection...
 diskpart /s %CD%\win81\diskpart.txt
-%CD%\win81\icacls.exe "K:\Recovery\" /setowner "Dartz" /T /C
+icacls "K:\Recovery\" /setowner "Dartz" /T /C
+icacls "K:\Recovery\" /grant Dartz:F /T /C
 xcopy "%CD%\win81\win81re\Winre.wim" "K:\Recovery\WindowsRE\Winre.wim" /Y
 goto EIGHTPOINTONEINSTALL
 :EIGHTPOINTONEINSTALL
@@ -150,7 +153,8 @@ IF %M%==1 GOTO WIN10INSTALLRE
 goto TENINSTALL
 echo Installing Windows RE Protection...
 diskpart /s %CD%\win10\diskpart.txt
-%CD%\win10\icacls.exe "K:\Recovery\" /setowner "Dartz" /T /C
+icacls "K:\Recovery\" /setowner "Dartz" /T /C
+icacls "K:\Recovery\" /grant Dartz:F /T /C
 xcopy "%CD%\win10\win10re\Winre.wim" "K:\Recovery\WindowsRE\Winre.wim" /Y
 goto TENINSTALL
 :TENINSTALL
