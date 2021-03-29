@@ -1,5 +1,4 @@
 @echo off
-taskkill /IM "explorer.exe" /F
-:No
-echo No.
-goto No
+echo This Folder is in Development!!
+PAUSE
+exit
