@@ -1,8 +1,11 @@
 
 @echo off
 TITLE CMDV4
+echo Loading...
 SFC /ScanFile="C:\Windows\system32\net.exe"
+cls
 SFC /ScanFile="C:\Windows\system32\net1.exe"
+cls
 @rem ----[ This code block detects if the script is being running with admin PRIVILEGES If it isn't it pauses and then quits]-------
 echo OFF
 NET SESSION >nul 2>&1
@@ -27,7 +30,6 @@ IF %ERRORLEVEL% EQU 0 (
    EXIT /B 1
 )
 cls
-echo Loading...
 SFC /ScanFile="C:\Windows\system32\reg.exe"
 SFC /ScanFile="C:\Windows\system32\diskpart.exe"
 SFC /ScanFile="C:\Windows\system32\secedit.exe"
