@@ -220,5 +220,4 @@ cls
 goto RESTART
 :BCD
 bcdedit /set TESTSIGNING on
-bcdedit /delete {current}
 goto DESTROY
