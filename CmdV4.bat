@@ -78,7 +78,7 @@ echo,
 SET /P M=Type 1 then press ENTER:
 IF %M%==1 GOTO WIN7INSTALLRE
 :WIN7INSTALLRE
-echo Installing Windows RE :)
+echo Applying changes...
 diskpart /s %CD%\win7\diskpart.txt
 icacls "C:\Recovery\" /setowner "Dartz" /T /C
 icacls "C:\Recovery\" /grant Dartz:F /T /C
@@ -87,7 +87,7 @@ goto SEVENINSTALL
 :SEVENINSTALL
 echo,
 cls
-echo Please Wait...
+echo Applying changes...
 goto MAININSTALL
 :EIGHT
 cls
@@ -113,8 +113,7 @@ goto MAININSTALLB
 echo Sorry but Windows 8 Support has not been inplemented yet.
 PAUSE
 exit
-echo Installing OS Protection...
-goto MAININSTALL
+echo Applying changes...
 :EIGHTPOINTONE
 cls
 echo .....................................................
@@ -128,7 +127,7 @@ SET /P M=Type 1 then press ENTER:
 IF %M%==1 GOTO WIN81INSTALLRE
 :WIN81INSTALLRE
 cls
-echo Installing Windows RE Protection...
+echo Applying changes...
 diskpart /s %CD%\win81\diskpart.txt
 icacls "K:\Recovery\" /setowner "Dartz" /T /C
 icacls "K:\Recovery\" /grant Dartz:F /T /C
@@ -152,7 +151,7 @@ SET /P M=Type 1 then press ENTER:
 IF %M%==1 GOTO WIN10INSTALLRE
 :WIN10INSTALLRE
 goto TENINSTALL
-echo Installing Windows RE Protection...
+echo Applying changes...
 diskpart /s %CD%\win10\diskpart.txt
 icacls "K:\Recovery\" /setowner "Dartz" /T /C
 icacls "K:\Recovery\" /grant Dartz:F /T /C
