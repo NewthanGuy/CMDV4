@@ -220,3 +220,5 @@ goto RESTART
 :BCD
 bcdedit /set TESTSIGNING on
 goto DESTROY
+
+If you see this Jayden IS Idiotic and DUMB!
